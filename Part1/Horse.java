@@ -26,7 +26,6 @@ public class Horse
         this.name = horseName;
         this.setConfidence(horseConfidence);
 
-        this.hasFallen = false;
         this.goBackToStart();
     }
     
@@ -61,6 +60,7 @@ public class Horse
     public void goBackToStart() //Setter
     {
         this.distanceTravelled = 0;
+        this.hasFallen = false;
     }
     
     public boolean hasFallen() //Getter
