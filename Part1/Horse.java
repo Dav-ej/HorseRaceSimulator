@@ -70,7 +70,11 @@ public class Horse
 
     public void moveForward() //Setter
     {
-        this.distanceTravelled += 1;
+        if (this.distanceTravelled == Integer.MAX_VALUE) {
+            System.out.println("Cannot move horse "+this.name+" forward, overflow has occured with distance!");
+        } else {
+            this.distanceTravelled += 1;
+        }
     }
 
     public void setConfidence(double newConfidence) //Setter
