@@ -3,7 +3,7 @@
  * Write a description of class Horse here.
  * 
  * @author Davud Jabiyev 
- * @version 1.1
+ * @version 1.2
  */
 public class Horse
 {
@@ -22,60 +22,66 @@ public class Horse
      */
     public Horse(char horseSymbol, String horseName, double horseConfidence)
     {
-        this.symbol = horseSymbol;
+        this.setSymbol(horseSymbol);
         this.name = horseName;
-        this.confidence = horseConfidence;
+        this.setConfidence(horseConfidence);
+
+        this.hasFallen = false;
+        this.goBackToStart();
     }
     
     
     
     //Other methods of class Horse
-    public void fall()
+    public void fall() //Setter
     {
         this.hasFallen = true;
     }
     
-    public double getConfidence()
+    public double getConfidence() //Getter
     {
         return this.confidence;
     }
     
-    public int getDistanceTravelled()
+    public int getDistanceTravelled() //Getter
     {
         return this.distanceTravelled;
     }
     
-    public String getName()
+    public String getName() //Getter
     {
         return this.name;
     }
     
-    public char getSymbol()
+    public char getSymbol() //Getter
     {
         return this.symbol;
     }
     
-    public void goBackToStart()
+    public void goBackToStart() //Setter
     {
         this.distanceTravelled = 0;
     }
     
-    public boolean hasFallen()
+    public boolean hasFallen() //Getter
     {
         return this.hasFallen;
     }
 
-    public void moveForward()
+    public void moveForward() //Setter
     {
         this.distanceTravelled += 1;
     }
 
-    public void setConfidence(double newConfidence)
+    public void setConfidence(double newConfidence) //Setter
     {
+        if (newConfidence < 0.0 || newConfidence > 1.0) {
+            throw new IllegalArgumentException("Confidence must be between 0 and 1 inclusive.");
+        }
         this.confidence = newConfidence;
     }
     
-    public void setSymbol(char newSymbol)
+    public void setSymbol(char newSymbol) //Setter
     {
         this.symbol = newSymbol;
     }
