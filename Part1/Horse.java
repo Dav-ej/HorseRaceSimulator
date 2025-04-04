@@ -3,7 +3,7 @@
  * Write a description of class Horse here.
  * 
  * @author Davud Jabiyev 
- * @version 1.2
+ * @version 1.3
  */
 public class Horse
 {
@@ -23,7 +23,9 @@ public class Horse
     public Horse(char horseSymbol, String horseName, double horseConfidence)
     {
         this.setSymbol(horseSymbol);
-        this.name = horseName;
+
+        this.setName(horseName);
+
         this.setConfidence(horseConfidence);
 
         this.goBackToStart();
@@ -31,44 +33,45 @@ public class Horse
     
     
     
-    //Other methods of class Horse
-    public void fall() //Setter
-    {
-        this.hasFallen = true;
-    }
-    
-    public double getConfidence() //Getter
+    //Getter Methods
+    public double getConfidence()
     {
         return this.confidence;
     }
     
-    public int getDistanceTravelled() //Getter
+    public int getDistanceTravelled() 
     {
         return this.distanceTravelled;
     }
     
-    public String getName() //Getter
+    public String getName() 
     {
         return this.name;
     }
     
-    public char getSymbol() //Getter
+    public char getSymbol() 
     {
         return this.symbol;
     }
     
-    public void goBackToStart() //Setter
-    {
-        this.distanceTravelled = 0;
-        this.hasFallen = false;
-    }
-    
-    public boolean hasFallen() //Getter
+    public boolean hasFallen() 
     {
         return this.hasFallen;
     }
 
-    public void moveForward() //Setter
+    //Setter methods
+    public void fall() 
+    {
+        this.hasFallen = true;
+    }
+    
+    public void goBackToStart() 
+    {
+        this.distanceTravelled = 0;
+        this.hasFallen = false;
+    }
+
+    public void moveForward() 
     {
         if (this.distanceTravelled == Integer.MAX_VALUE) {
             System.out.println("Cannot move horse "+this.name+" forward, overflow has occured with distance!");
@@ -77,7 +80,7 @@ public class Horse
         }
     }
 
-    public void setConfidence(double newConfidence) //Setter
+    public void setConfidence(double newConfidence) 
     {
         if (newConfidence < 0.0 || newConfidence > 1.0) {
             throw new IllegalArgumentException("Confidence must be between 0 and 1 inclusive.");
@@ -85,9 +88,42 @@ public class Horse
         this.confidence = newConfidence;
     }
     
-    public void setSymbol(char newSymbol) //Setter
+    public void setSymbol(char newSymbol) 
     {
-        this.symbol = newSymbol;
+        if (!isCharVisible(newSymbol)) {
+            System.out.println("Symbol is invisible, falling back to: H");
+            this.symbol = 'H';
+        } else {
+            this.symbol = newSymbol;
+        }
     }
-    
+
+    private void setName(String newName)
+    {
+        if (isStringVisible(newName)) {
+            this.name = newName;
+        } else {
+            System.out.println("Horse name is not visible, falling back to: Horse");
+            this.name = "Horse";
+        }
+    }
+
+    //Helper methods
+    public boolean isCharVisible(char c) 
+    {
+        if (Character.isWhitespace(c) || Character.isISOControl(c)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isStringVisible(String s) 
+    {
+        for (int i = 0; i < s.length(); i++) { // return true if any visible character
+            if (!isCharVisible(s.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
