@@ -3,7 +3,7 @@
  * Write a description of class Horse here.
  * 
  * @author Davud Jabiyev 
- * @version 1.3
+ * @version 1.4
  */
 public class Horse
 {
@@ -75,9 +75,13 @@ public class Horse
     {
         if (this.distanceTravelled == Integer.MAX_VALUE) {
             System.out.println("Cannot move horse "+this.name+" forward, overflow has occured with distance!");
-        } else {
-            this.distanceTravelled += 1;
+            return;
         }
+        if (this.hasFallen) {
+            System.out.println("Cannot move horse "+this.name+"forward, horse has fallen!");
+            return;
+        }
+        this.distanceTravelled += 1;
     }
 
     public void setConfidence(double newConfidence) 
@@ -119,8 +123,9 @@ public class Horse
 
     public boolean isStringVisible(String s) 
     {
+        if (s == null) { return false; }
         for (int i = 0; i < s.length(); i++) { // return true if any visible character
-            if (!isCharVisible(s.charAt(i))) {
+            if (isCharVisible(s.charAt(i))) {
                 return true;
             }
         }
