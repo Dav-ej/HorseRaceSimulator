@@ -74,7 +74,7 @@ public class Horse
     public void moveForward() 
     {
         if (this.distanceTravelled == Integer.MAX_VALUE) {
-            System.out.println("Cannot move horse "+this.name+" forward, overflow has occured with distance!");
+            System.out.println("Cannot move horse "+this.name+" forward, overflow will occur with distance!");
             return;
         }
         if (this.hasFallen) {
