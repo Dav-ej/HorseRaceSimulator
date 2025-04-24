@@ -78,7 +78,7 @@ public class Horse
             return;
         }
         if (this.hasFallen) {
-            System.out.println("Cannot move horse "+this.name+"forward, horse has fallen!");
+            System.out.println("Cannot move horse "+this.name+" forward, horse has fallen!");
             return;
         }
         this.distanceTravelled += 1;

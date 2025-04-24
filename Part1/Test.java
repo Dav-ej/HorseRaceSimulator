@@ -2,7 +2,7 @@
  * A class to run and test the CLI game
  * 
  * @author Davud Jabiyev
- * @version 1.1
+ * @version 1.2
  */
 public class Test {
     public static void main(String[] args) {
@@ -168,6 +168,18 @@ public class Test {
         print("(10/13) Testing setter goBackToStart:");
         print("- getDistanceTravelled result before: "+h1.getDistanceTravelled());
         h1.goBackToStart();
+        print("- getDistanceTravelled result after: "+h1.getDistanceTravelled(), "");
+
+
+        // (10.5/13) Testing moveForward after fallen
+        //
+        print("(10.5/13) Testing moveForward after fallen");
+        print("- hasFallen result before: "+h1.hasFallen());
+        h1.fall();
+        print("- hasFallen result after: "+h1.hasFallen(), "");
+        print("- 1 iteration of moveForward:");
+        print("- getDistanceTravelled result before: "+h1.getDistanceTravelled());
+        h1.moveForward();
         print("- getDistanceTravelled result after: "+h1.getDistanceTravelled(), "");
 
 
