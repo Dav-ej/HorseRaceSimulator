@@ -25,6 +25,10 @@ public class Race
     public Race(int distance, int lanes)
     {
         // initialise instance variables
+        if (distance <= 0) {
+            System.out.println("Cannot be less than 1 distance! Falling back to 1.");
+            distance = 1;
+        }
         raceLength = distance;
         if (lanes <= 0) { 
             System.out.println("Cannot be less than 1 lane! Falling back to 1 lane.");
