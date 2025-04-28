@@ -22,6 +22,10 @@ public class Program {
         p.startRaceGUI();
     }
 
+    /**
+     * Starts the GUI Program
+     * 
+     */
     public void startRaceGUI() {
         // Init breeds
         Breed karabakh = new Breed("Karabakh Horse", "Known for endurance and agility", 0.35, 0.25);
@@ -84,6 +88,10 @@ public class Program {
      * @param horseName the name of the horse to remove
      */
     public void removeHorse(String horseName) {
+        if (this.currentRace != null && this.currentRace.isInProgress()) {
+            JOptionPane.showMessageDialog(null, "Cannot configure horses while a race is in progress.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         for (int i = 0; i < horses.size(); i++) {
             if (horses.get(i).getName().equals(horseName)) {
                 horses.remove(i);
