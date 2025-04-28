@@ -102,8 +102,8 @@ public class Program {
      */
     public static void createRace(int distance, int lanes, Horse... horsesVarArgs) {
         Race r = new Race(distance, lanes);
-        for (Horse horse : horsesVarArgs) {
-            r.addHorse(horse);
+        for (int i = 0; i < horsesVarArgs.length; i++) {
+            r.addHorse(horsesVarArgs[i], i);
         }
         currentRace = r;
     }
