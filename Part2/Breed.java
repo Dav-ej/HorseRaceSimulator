@@ -9,6 +9,7 @@ public class Breed {
     private double reductionInChanceOfFalling;
     private String name;
     private String desc;
+    private String image;
 
     /**
      * Constructor for objects of class Breed
@@ -16,9 +17,10 @@ public class Breed {
      * @param chanceOfExtraMovement the chance of extra movement for a horse each turn
      * @param reductionInChanceOfFalling the percentage reduction in chance of falling for a horse
      */
-    public Breed(String name, String desc, double chanceOfExtraMovement, double reductionInChanceOfFalling) {
+    public Breed(String name, String desc, String image, double chanceOfExtraMovement, double reductionInChanceOfFalling) {
         this.name = name;
         this.desc = desc;
+        this.image = image;
         if (chanceOfExtraMovement < 0) {
             chanceOfExtraMovement = 0;
         }
@@ -73,5 +75,15 @@ public class Breed {
     public String getDesc() 
     {
         return this.desc;
+    }
+
+    /**
+     * Getter for the image field
+     * 
+     * @return the image of the breed
+     */
+    public String getImage() 
+    {
+        return this.image;
     }
 }
