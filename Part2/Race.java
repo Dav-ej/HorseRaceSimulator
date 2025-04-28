@@ -14,6 +14,7 @@ public class Race
 {
     private int raceLength;
     private Horse[] horses;
+    private boolean isInProgress;
 
     /**
      * Constructor for objects of class Race
@@ -35,6 +36,7 @@ public class Race
             lanes = 1;
         }
         horses = new Horse[lanes];
+        isInProgress = false;
     }
     
     /**
@@ -60,6 +62,9 @@ public class Race
      */
     public void startRace()
     {
+        // start race active
+        isInProgress = true;
+
         //declare a local variable to tell us when the race is finished
         boolean finished = false;
         
@@ -129,8 +134,12 @@ public class Race
             //wait for 100 milliseconds
             try{ 
                 TimeUnit.MILLISECONDS.sleep(100);
-            }catch(Exception e){}
+            }catch(Exception e){
+                isInProgress = false;
+            }
         }
+        //update isInProgress
+        isInProgress = false;
     }
     
     /**
