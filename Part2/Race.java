@@ -173,7 +173,7 @@ public class Race
             }
 
             // roll a chance to move again
-            if (Math.random() < theHorse.getBreed().getChanceOfExtraMovement()) {
+            if (!raceWonBy(theHorse) && Math.random() < theHorse.getBreed().getChanceOfExtraMovement()) {
                 System.out.println("MOVED AGAIN");
                 theHorse.moveForward();
             }
