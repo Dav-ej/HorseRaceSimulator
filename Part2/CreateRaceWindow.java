@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class CreateRaceWindow {
     private ArrayList<Horse> selectedHorses;
     private int trackLength;
-    public void CreateRaceWindow(Program program) {
+    public void CreateRaceWindow(Program program, ProgramWindow programWindow) {
         // init vars
         selectedHorses = new ArrayList<Horse>();
         trackLength = 15;
@@ -135,6 +135,7 @@ public class CreateRaceWindow {
             }
 
             program.createRace(trackLength, selectedHorses.size(), selectedHorses.toArray(new Horse[0]));
+            programWindow.reloadScrollPane();
             frame.dispose();
         });
 
