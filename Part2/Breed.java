@@ -14,6 +14,9 @@ public class Breed {
     /**
      * Constructor for objects of class Breed
      * 
+     * @param name the name of the breed
+     * @param desc the description of the breed
+     * @param image the name of the file for the image of the horse breed (minus .png; must work with _fallen.png also)
      * @param chanceOfExtraMovement the chance of extra movement for a horse each turn
      * @param reductionInChanceOfFalling the percentage reduction in chance of falling for a horse
      */

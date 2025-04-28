@@ -3,9 +3,20 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class shows the user a window to create a race
+ * 
+ */
 public class CreateRaceWindow {
     private ArrayList<Horse> selectedHorses;
     private int trackLength;
+
+    /**
+     * This runs the code to create and run the window
+     * 
+     * @param program this is the instance that holds the app state
+     * @param programWindow this is the main window of the program from which this was launched
+     */
     public void CreateRaceWindow(Program program, ProgramWindow programWindow) {
         // init vars
         selectedHorses = new ArrayList<Horse>();

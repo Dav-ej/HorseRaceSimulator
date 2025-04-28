@@ -67,7 +67,6 @@ public class Program {
     /**
      * Creates and adds a new horse
      * 
-     * @param horseSymbol the symbol of the horse (printed in their lane)
      * @param horseName the name of the horse
      * @param horseConfidence the confidence of the horse (between 0 and 1 inclusive)
      * @param breed the breed of the horse

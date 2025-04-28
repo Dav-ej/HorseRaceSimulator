@@ -3,8 +3,20 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+
+/**
+ * This class gives the user a horse input window to create a new horse
+ * 
+ */
 public class AddHorseWindow {
     private String selectedColour;
+
+    /**
+     * Actually creates the window and runs it
+     * 
+     * @param program the program instance that contains the state
+     * @param horsesWindowFram the frame of the Horses Window from which this window was launched
+     */
     public void AddHorseWindow(Program program, JFrame horsesWindowFrame) {
         //public void createHorse(String horseName, double horseConfidence, Breed breed, String coatColour) {
 

@@ -3,12 +3,21 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class is the main window for this application where the race and menu buttons are shown
+ * 
+ */
 public class ProgramWindow {
     private JPanel rootPanel;
     private Program program;
     private JPanel racePanel;
     private ArrayList<JPanel> horseObjects = new ArrayList<>();
 
+    /**
+     * This is where the main code is run to launch and run this window
+     * 
+     * @param program the instance that holds the app state
+     */
     public void ProgramWindow(Program program) {
         //init program var
         this.program = program;
@@ -96,6 +105,10 @@ public class ProgramWindow {
         frame.setVisible(true);
     }
 
+    /**
+     * This loads (/reloads) the racePane which renders the actual race with lanes and horses, including horse information
+     * 
+     */
     public void reloadScrollPane() {
         program = this.program;
         racePanel = this.racePanel;
@@ -183,6 +196,10 @@ public class ProgramWindow {
         }
     }
 
+    /**
+     * This redraws the horses in racePane to update their positions and state (e.g. fallen)
+     * 
+     */
     public void redrawHorses() {
         program = this.program;
         racePanel = this.racePanel;
