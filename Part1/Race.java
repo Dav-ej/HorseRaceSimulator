@@ -160,6 +160,7 @@ public class Race
             if (Math.random() < (0.1*theHorse.getConfidence()*theHorse.getConfidence()))
             {
                 theHorse.fall();
+                theHorse.setConfidence(Math.max(0, theHorse.getConfidence()-0.025));
             }
         }
     }
@@ -174,6 +175,7 @@ public class Race
     {
         if (theHorse.getDistanceTravelled() >= raceLength)
         {
+            theHorse.setConfidence(Math.min(1,theHorse.getConfidence()+0.025));
             return true;
         }
         else
