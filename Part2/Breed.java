@@ -19,7 +19,19 @@ public class Breed {
     public Breed(String name, String desc, double chanceOfExtraMovement, double reductionInChanceOfFalling) {
         this.name = name;
         this.desc = desc;
+        if (chanceOfExtraMovement < 0) {
+            chanceOfExtraMovement = 0;
+        }
+        if (chanceOfExtraMovement > 1) {
+            chanceOfExtraMovement = 1;
+        }
         this.chanceOfExtraMovement = reductionInChanceOfFalling;
+        if (reductionInChanceOfFalling < 0) {
+            reductionInChanceOfFalling = 0;
+        }
+        if (reductionInChanceOfFalling > 1) {
+            reductionInChanceOfFalling = 1;
+        }
         this.reductionInChanceOfFalling = reductionInChanceOfFalling;
     }
     
