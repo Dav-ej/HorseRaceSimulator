@@ -101,6 +101,12 @@ public class Program {
      * @param horsesVarArgs a variable number of Horse objects to be added to the race
      */
     public static void createRace(int distance, int lanes, Horse... horsesVarArgs) {
+        if (currentRace != null) {
+            if (currentRace.isInProgress) {
+                JOptionPane.showMessageDialog(null, "Cannot start new race while one is in progress", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
         Race r = new Race(distance, lanes);
         for (int i = 0; i < horsesVarArgs.length; i++) {
             r.addHorse(horsesVarArgs[i], i);
