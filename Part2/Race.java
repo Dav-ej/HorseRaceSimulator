@@ -233,7 +233,7 @@ public class Race
         }
         else
         {
-            System.out.print(theHorse.getSymbol());
+            System.out.print("X");
         }
         
         //print the spaces after the horse
