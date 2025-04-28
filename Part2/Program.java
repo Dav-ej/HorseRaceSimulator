@@ -102,7 +102,7 @@ public class Program {
      */
     public static void createRace(int distance, int lanes, Horse... horsesVarArgs) {
         if (currentRace != null) {
-            if (currentRace.isInProgress) {
+            if (currentRace.isInProgress()) {
                 JOptionPane.showMessageDialog(null, "Cannot start new race while one is in progress", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
