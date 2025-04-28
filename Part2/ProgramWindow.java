@@ -36,8 +36,12 @@ public class ProgramWindow {
         btnPanel.add(horsesBtn);
         // launch CreateRaceWindow on raceConfigBtn press
         horsesBtn.addActionListener(e -> {
-            HorsesWindow horsesWindow = new HorsesWindow();
-            horsesWindow.HorsesWindow(program);
+            if (program.getCurrentRace() != null && program.getCurrentRace().isInProgress()) {
+                JOptionPane.showMessageDialog(frame, "Cannot configure horses while a race is in progress.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                HorsesWindow horsesWindow = new HorsesWindow();
+                horsesWindow.HorsesWindow(program);
+            }
         });
 
         rootPanel.add(btnPanel);
