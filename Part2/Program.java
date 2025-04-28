@@ -12,16 +12,17 @@ import java.time.LocalDateTime;
  * @version 1
  */
 public class Program {
-    private static ArrayList<Horse> horses = new ArrayList<Horse>();
-    private static ArrayList<RaceData> completedRaces = new ArrayList<RaceData>();
-    private static Race currentRace;
-    private static Breed[] breeds;
+    private ArrayList<Horse> horses = new ArrayList<Horse>();
+    private ArrayList<RaceData> completedRaces = new ArrayList<RaceData>();
+    private Race currentRace;
+    private Breed[] breeds;
 
     public static void main(String[] args) {
-        startRaceGUI();
+        Program p = new Program();
+        p.startRaceGUI();
     }
 
-    public static void startRaceGUI() {
+    public void startRaceGUI() {
         // Init breeds
         Breed karabakh = new Breed("Karabakh Horse", "Known for endurance and agility", 0.35, 0.25);
         Breed friesian = new Breed("Friesian Horse", "Slower but rarely stumble", 0.20, 0.40);
@@ -29,18 +30,19 @@ public class Program {
         breeds = new Breed[]{karabakh, friesian, akhalteke};
 
 
-        // Remove the non existant horse with the name
-        removeHorse("Thunder");
+        // Create random horses
+        for (int i = 0; i < 5; i++) {
+            String randomName = "Horse" + (i + 1);
+            double randomConfidence = Math.random(); // Random confidence between 0 and 1
+            Breed randomBreed = breeds[(int) (Math.random() * breeds.length)];
+            String randomCoatColour = String.format("%06x", (int) (Math.random() * 0xFFFFFF));
+            createHorse(randomName, randomConfidence, randomBreed, randomCoatColour);
+        }
 
-        // Create two horses with the same name
-        createHorse("Thunder", 0.8, karabakh, "FFD700");
-        createHorse("Thunder", 0.7, friesian, "000000");
-
-        // Remove the horse with the name
-        removeHorse("Thunder");
-
-        // Create a third horse with the same name
-        createHorse("Thunder", 0.9, akhalteke, "8B0000");
+        //CreateRaceWindow crw = new CreateRaceWindow();
+        //crw.CreateRaceWindow(this);
+        ProgramWindow pw = new ProgramWindow();
+        pw.ProgramWindow(this);
     }
 
     /**
@@ -49,7 +51,7 @@ public class Program {
      * @param name the name to check for
      * @return true if the horse name is already taken, false otherwise
      */
-    public static boolean isHorseNameTaken(String name) {
+    public boolean isHorseNameTaken(String name) {
         for (int i = 0; i < horses.size(); i++) {
             if (horses.get(i).getName().equals(name)) {
                 return true;
@@ -67,7 +69,7 @@ public class Program {
      * @param breed the breed of the horse
      * @param coatColour should be a Hex value without #
      */
-    public static void createHorse(String horseName, double horseConfidence, Breed breed, String coatColour) {
+    public void createHorse(String horseName, double horseConfidence, Breed breed, String coatColour) {
         if (isHorseNameTaken(horseName)) {
             JOptionPane.showMessageDialog(null, "Horse name is already taken.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -81,7 +83,7 @@ public class Program {
      * 
      * @param horseName the name of the horse to remove
      */
-    public static void removeHorse(String horseName) {
+    public void removeHorse(String horseName) {
         for (int i = 0; i < horses.size(); i++) {
             if (horses.get(i).getName().equals(horseName)) {
                 horses.remove(i);
@@ -92,6 +94,14 @@ public class Program {
         JOptionPane.showMessageDialog(null, "Horse ("+horseName+") not found.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Returns an list of horses
+     * 
+     * @return an ArrayList of Horse objects
+     */
+    public ArrayList<Horse> getHorses() {
+        return horses;
+    }
     
     /**
      * Creates a new race with the specified distance and number of lanes, and adds the given horses to the race
@@ -100,7 +110,7 @@ public class Program {
      * @param lanes the number of lanes available in the race
      * @param horsesVarArgs a variable number of Horse objects to be added to the race
      */
-    public static void createRace(int distance, int lanes, Horse... horsesVarArgs) {
+    public void createRace(int distance, int lanes, Horse... horsesVarArgs) {
         if (currentRace != null) {
             if (currentRace.isInProgress()) {
                 JOptionPane.showMessageDialog(null, "Cannot start new race while one is in progress", "Error", JOptionPane.ERROR_MESSAGE);
@@ -109,7 +119,7 @@ public class Program {
         }
         Race r = new Race(distance, lanes);
         for (int i = 0; i < horsesVarArgs.length; i++) {
-            r.addHorse(horsesVarArgs[i], i);
+            r.addHorse(horsesVarArgs[i], i+1);
         }
         currentRace = r;
     }
@@ -119,7 +129,16 @@ public class Program {
      * 
      * @return an array of Breed objects
      */
-    public static Breed[] getBreeds() {
+    public Breed[] getBreeds() {
         return breeds;
+    }
+
+    /**
+     * Returns the current race
+     * 
+     * @return the current Race object, or null if no race is active
+     */
+    public Race getCurrentRace() {
+        return currentRace;
     }
 }
