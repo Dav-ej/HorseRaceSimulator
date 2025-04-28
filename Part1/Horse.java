@@ -46,6 +46,7 @@ public class Horse
     /**
      * Getter for the horse's confidence field
      * 
+     * @return the confidence level of the horse
      */
     public double getConfidence()
     {
@@ -55,6 +56,7 @@ public class Horse
     /**
      * Getter for the horse's distanceTravelled field
      * 
+     * @return the distance travelled by the horse
      */
     public int getDistanceTravelled() 
     {
@@ -64,6 +66,7 @@ public class Horse
     /**
      * Getter for the horse's name field
      * 
+     * @return the name of the horse
      */
     public String getName() 
     {
@@ -73,6 +76,7 @@ public class Horse
     /**
      * Getter for the horse's symbol field
      * 
+     * @return the symbol representing the horse
      */
     public char getSymbol() 
     {
@@ -82,97 +86,18 @@ public class Horse
     /**
      * Getter for the horse's hasFallen field
      * 
+     * @return true if the horse has fallen, false otherwise
      */
     public boolean hasFallen() 
     {
         return this.hasFallen;
     }
 
-    //Setter methods
-    /**
-     * Sets the horses hasFallen value to true
-     * 
-     */
-    public void fall() 
-    {
-        this.hasFallen = true;
-    }
-    
-    /**
-     * Sets the horses distanceTravelled to 0 and hasFallen to false
-     * 
-     */
-    public void goBackToStart() 
-    {
-        this.distanceTravelled = 0;
-        this.hasFallen = false;
-    }
-
-    /**
-     * Increments the horses distanceTravelled by 1
-     * 
-     */
-    public void moveForward() 
-    {
-        if (this.distanceTravelled == Integer.MAX_VALUE) {
-            System.out.println("Cannot move horse "+this.name+" forward, overflow will occur with distance!");
-            return;
-        }
-        if (this.hasFallen) {
-            System.out.println("Cannot move horse "+this.name+" forward, horse has fallen!");
-            return;
-        }
-        this.distanceTravelled += 1;
-    }
-
-    /**
-     * Sets the horses confidence field (between 0 and 1 inclusive)
-     * 
-     * @param newConfidence the new confidence to set the horse to
-     */
-    public void setConfidence(double newConfidence) 
-    {
-        if (newConfidence < 0.0 || newConfidence > 1.0) {
-            throw new IllegalArgumentException("Confidence must be between 0 and 1 inclusive.");
-        }
-        this.confidence = newConfidence;
-    }
-    
-    /**
-     * Sets the horses symbol (must be visible)
-     * 
-     * @param newSymbol the new symbol to set the horse to
-     */
-    public void setSymbol(char newSymbol) 
-    {
-        if (!isCharVisible(newSymbol)) {
-            System.out.println("Symbol is invisible, falling back to: H");
-            this.symbol = 'H';
-        } else {
-            this.symbol = newSymbol;
-        }
-    }
-
-    /**
-     * Sets the horses name
-     * 
-     * @param newName the new name to set the horse to
-     */
-    private void setName(String newName)
-    {
-        if (isStringVisible(newName)) {
-            this.name = newName;
-        } else {
-            System.out.println("Horse name is not visible, falling back to: Horse");
-            this.name = "Horse";
-        }
-    }
-
-    //Helper methods
     /**
      * Checks if a given character is visible
      * 
      * @param c the character that is checked for being visible
+     * @return true if the character is visible, false otherwise
      */
     public boolean isCharVisible(char c) 
     {
@@ -186,6 +111,7 @@ public class Horse
      * Checks if a given string has any visible characters
      * 
      * @param s the string that is checked for having any visible characters
+     * @return true if the string contains any visible characters, false otherwise
      */
     public boolean isStringVisible(String s) 
     {
@@ -197,4 +123,3 @@ public class Horse
         }
         return false;
     }
-}
