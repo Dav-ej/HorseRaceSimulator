@@ -38,6 +38,20 @@ public class Horse
         
         this.coatColour = coatColour;
     }
+
+    
+    /**
+     * Sets the horses confidence field (between 0 and 1 inclusive)
+     * 
+     * @param newConfidence the new confidence to set the horse to
+     */
+    public void setConfidence(double newConfidence) 
+    {
+        if (newConfidence < 0.0 || newConfidence > 1.0) {
+            throw new IllegalArgumentException("Confidence must be between 0 and 1 inclusive.");
+        }
+        this.confidence = newConfidence;
+    }
     
     
     
