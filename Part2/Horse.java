@@ -40,6 +40,60 @@ public class Horse
     }
 
     
+
+    //Setter methods
+    /**
+     * Sets the horses hasFallen value to true
+     * 
+     */
+    public void fall() 
+    {
+        this.hasFallen = true;
+    }
+    
+    /**
+     * Sets the horses distanceTravelled to 0 and hasFallen to false
+     * 
+     */
+    public void goBackToStart() 
+    {
+        this.distanceTravelled = 0;
+        this.hasFallen = false;
+    }
+
+    /**
+     * Increments the horses distanceTravelled by 1
+     * 
+     */
+    public void moveForward() 
+    {
+        if (this.distanceTravelled == Integer.MAX_VALUE) {
+            System.out.println("Cannot move horse "+this.name+" forward, overflow will occur with distance!");
+            return;
+        }
+        if (this.hasFallen) {
+            System.out.println("Cannot move horse "+this.name+" forward, horse has fallen!");
+            return;
+        }
+        this.distanceTravelled += 1;
+    }
+
+    /**
+     * Sets the horses name
+     * 
+     * @param newName the new name to set the horse to
+     */
+    private void setName(String newName)
+    {
+        if (isStringVisible(newName)) {
+            this.name = newName;
+        } else {
+            System.out.println("Horse name is not visible, falling back to: Horse");
+            this.name = "Horse";
+        }
+    }
+
+
     /**
      * Sets the horses confidence field (between 0 and 1 inclusive)
      * 
