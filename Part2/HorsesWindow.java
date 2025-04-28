@@ -8,7 +8,7 @@ public class HorsesWindow {
         // Create the window
         JFrame frame = new JFrame("Horse Race Simulator - Horses");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(800, 400);
+        frame.setSize(900, 400);
         frame.setLocationRelativeTo(null); // center the frame on the screen
 
 
@@ -36,27 +36,66 @@ public class HorsesWindow {
         /// Scrollable Checkable Horses:
         ArrayList<Horse> horses = program.getHorses(); // get horses
 
-        String[][] horseData = new String[horses.size()][3];
+        String[][] horseData = new String[horses.size()][4];
         for (int i = 0; i < horses.size(); i++) { // extract horses data
             horseData[i][0] = horses.get(i).getName();
             horseData[i][1] = "Breed: " + horses.get(i).getBreed().getName();
             horseData[i][2] = "Confidence: " + horses.get(i).getConfidence();
+            horseData[i][3] = horses.get(i).getCoatColour();
         }
 
         JPanel horseListPanel = new JPanel(); // create list
         horseListPanel.setLayout(new BoxLayout(horseListPanel, BoxLayout.Y_AXIS));
 
         for (String[] horse : horseData) { // create rows of horses with checkbox
+            JPanel horseIcon = new JPanel();
+            horseIcon.setPreferredSize(new Dimension(20, 20));
+            try {
+                horseIcon.setBackground(Color.decode("#" + horse[3]));
+            } catch (NumberFormatException e) {
+                horseIcon.setBackground(Color.BLACK);
+            }
+
             JPanel horseRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
             JLabel horseNameLabel = new JLabel(horse[0]);
             JLabel horseSpeedLabel = new JLabel(horse[1]);
             JLabel horseStaminaLabel = new JLabel(horse[2]);
 
+            JButton deleteBtn = new JButton("Delete");
+            deleteBtn.addActionListener(e -> { // logic for delete button
+                int confirmation = JOptionPane.showConfirmDialog( // confirm popup
+                    null,
+                    "Are you sure you want to delete this horse?",
+                    "Confirm Deletion",
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    program.removeHorse(horse[0]); // remove by name
+
+                    // rerender horses
+                    horseListPanel.remove(horseRow);
+                    horseListPanel.revalidate();
+                    horseListPanel.repaint();
+                }
+            });
+
+            JButton historyBtn = new JButton("History and Stats");
+            historyBtn.addActionListener(e -> { // logic for history button
+                // launch history window
+
+            });
+
+            horseRow.add(horseIcon);
+            horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
             horseRow.add(horseNameLabel);
             horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
             horseRow.add(horseSpeedLabel);
             horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
             horseRow.add(horseStaminaLabel);
+            horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
+            horseRow.add(deleteBtn);
+            horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
+            horseRow.add(historyBtn);
 
             horseListPanel.add(horseRow);
         }
@@ -76,7 +115,8 @@ public class HorsesWindow {
         btnPanel.add(addBtn);
         // cancel button logic (just closes window)
         addBtn.addActionListener(e -> {
-            
+            AddHorseWindow addHorseWindow = new AddHorseWindow();
+            addHorseWindow.AddHorseWindow(program, frame);
         });
 
         JButton doneBtn = new JButton("Done");
