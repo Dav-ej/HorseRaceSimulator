@@ -18,6 +18,7 @@ public class Breed {
      */
     public Breed(String name, String desc, double chanceOfExtraMovement, double reductionInChanceOfFalling) {
         this.name = name;
+        this.desc = desc;
         this.chanceOfExtraMovement = reductionInChanceOfFalling;
         this.reductionInChanceOfFalling = reductionInChanceOfFalling;
     }
