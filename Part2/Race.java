@@ -281,4 +281,14 @@ public class Race
     {
         return isInProgress;
     }
+
+    /**
+     * Get the array of horses in the race
+     * 
+     * @return the array of horses
+     */
+    public Horse[] getHorses()
+    {
+        return horses;
+    }
 }
