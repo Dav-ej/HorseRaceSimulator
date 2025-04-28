@@ -15,6 +15,7 @@ public class Race
     private int raceLength;
     private Horse[] horses;
     private boolean isInProgress;
+    private ProgramWindow programWindow;
 
     /**
      * Constructor for objects of class Race
@@ -86,9 +87,11 @@ public class Race
                     moveHorse(horses[i]);
                 }
             }
-                        
-            //print the race positions
-            printRace();
+
+            // redraw horses in GUI
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                programWindow.redrawHorses();
+            });
 
             //if all horses have fallen, the race is finshed
             boolean allFallen = true;
@@ -102,9 +105,7 @@ public class Race
             }
             if ( allFallen ) {
                 finished = true;
-                System.out.println();
-                System.out.println("All horses have fallen!! There are no winners.");
-                System.out.println();
+                javax.swing.JOptionPane.showMessageDialog(null, "All horses have fallen!! There are no winners.", "Race Over", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
             
             //if any of the horses has won the race is finished
@@ -117,18 +118,17 @@ public class Race
             }
             if ( winners.size() > 0 ) {
                 finished = true;
-                System.out.println();
-                System.out.print("And the winner");
-                System.out.print((winners.size() == 1) ? " is... " :  "s are... ");
+                String message = "And the winner" + (winners.size() == 1 ? " is... " : "s are... ");
                 for (int i = 0; i < winners.size(); i++) {
                     if (i == 0) {
-                        System.out.print(winners.get(i).getName());
+                        message += winners.get(i).getName();
                     } else {
-                        System.out.print(", "+winners.get(i).getName());
+                        message += ", " + winners.get(i).getName();
                     }
                 }
-                System.out.println("!");
-                System.out.println();
+                message += "!";
+
+                javax.swing.JOptionPane.showMessageDialog(null, message, "Race Over", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
            
             //wait for 100 milliseconds
@@ -166,12 +166,27 @@ public class Race
             //the probability that the horse will fall is very small (max is 0.1)
             //but will also will depends exponentially on confidence 
             //so if you double the confidence, the probability that it will fall is *2
-            if (Math.random() < (0.1*theHorse.getConfidence()*theHorse.getConfidence()))
+            if (Math.random() < ((0.1*theHorse.getConfidence()*(theHorse.getConfidence()- theHorse.getBreed().getReductionInChanceOfFalling()))))
             {
                 theHorse.fall();
                 theHorse.setConfidence(Math.max(0, theHorse.getConfidence()-0.025));
             }
+
+            // roll a chance to move again
+            if (Math.random() < theHorse.getBreed().getChanceOfExtraMovement()) {
+                System.out.println("MOVED AGAIN");
+                theHorse.moveForward();
+            }
         }
+    }
+
+    /**
+     * Set the program window for the race
+     * 
+     * @param programWindow the ProgramWindow instance to be set
+     */
+    public void setProgramWindow(ProgramWindow programWindow) {
+        this.programWindow = programWindow;
     }
         
     /** 
@@ -191,68 +206,6 @@ public class Race
         {
             return false;
         }
-    }
-    
-    /***
-     * Print the race on the terminal
-     */
-    private void printRace()
-    {
-        System.out.print('\u000C');  //clear the terminal window
-        
-        multiplePrint('=',raceLength+3); //top edge of track
-        System.out.println();
-        
-        //each horse
-        for ( int i = 0; i<horses.length; i++ ) {
-            if ( horses[i] != null ) {
-                printLane(horses[i]);
-                System.out.println();
-            }
-        }
-        
-        multiplePrint('=',raceLength+3); //bottom edge of track
-        System.out.println();    
-    }
-    
-    /**
-     * print a horse's lane during the race
-     * for example
-     * |           X                      |
-     * to show how far the horse has run
-     */
-    private void printLane(Horse theHorse)
-    {
-        //calculate how many spaces are needed before
-        //and after the horse
-        int spacesBefore = theHorse.getDistanceTravelled();
-        int spacesAfter = raceLength - theHorse.getDistanceTravelled();
-        
-        //print a | for the beginning of the lane
-        System.out.print('|');
-        
-        //print the spaces before the horse
-        multiplePrint(' ',spacesBefore);
-        
-        //if the horse has fallen then print dead
-        //else print the horse's symbol
-        if(theHorse.hasFallen())
-        {
-            System.out.print('\u2322');
-        }
-        else
-        {
-            System.out.print("X");
-        }
-        
-        //print the spaces after the horse
-        multiplePrint(' ',spacesAfter);
-        
-        //print the | for the end of the track
-        System.out.print('|');
-
-        //print the horse name and confidence
-        System.out.print(" "+theHorse.getName()+" (Current confidence: "+theHorse.getConfidence()+")");
     }
         
     
@@ -290,5 +243,15 @@ public class Race
     public Horse[] getHorses()
     {
         return horses;
+    }
+
+    /**
+     * Get the length of the race
+     * 
+     * @return the length of the race
+     */
+    public int getRaceLength()
+    {
+        return raceLength;
     }
 }
