@@ -94,8 +94,8 @@ public class HorsesWindow {
             horseRow.add(horseStaminaLabel);
             horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
             horseRow.add(deleteBtn);
-            horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
-            horseRow.add(historyBtn);
+            //horseRow.add(Box.createHorizontalStrut(10)); // Add spacing
+            //horseRow.add(historyBtn);
 
             horseListPanel.add(horseRow);
         }
