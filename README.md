@@ -15,7 +15,7 @@ You can download the code from github either through your browser or terminal.
 4. Execute the code: `java RunCLI` or `java Program`
 
 ## Usage of CLI
-Inside the main function in Part1/RunCLI.java, you'll find some code to assist setup:
+Inside the main function in Part1/RunCLI.java, you'll find some code to assist setup (configuration and calling of `race.startRace();`):
 ```
 // NOTE: Read the README file in the git repo to ensure you know what you are doing
 
@@ -46,6 +46,8 @@ Familiarise yourself with this code and simply follow the comments to adjust as 
 
 ## Usage of GUI
 The GUI version of this app automatically creates 5 random horses at launch. The GUI launches a window from which you can config races, customise horses, and start races. There aren't any complicated menus and usage should be intuitive.
+
+The main Function in Program automatically calls `startRaceGUI()` which runs the application.
 
 ## Contact
 If you have any questions, don't hesitate to reach me at `jabiyev@icloud.com`
