@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 public class Program {
     private ArrayList<Horse> horses = new ArrayList<Horse>();
-    private ArrayList<RaceData> completedRaces = new ArrayList<RaceData>();
+    //private ArrayList<RaceData> completedRaces = new ArrayList<RaceData>();
     private Race currentRace;
     private Breed[] breeds;
 
@@ -28,23 +28,23 @@ public class Program {
      */
     public void startRaceGUI() {
         // Init breeds
-        Breed karabakh = new Breed("Karabakh Horse", "Known for endurance and agility", 0.35, 0.25);
-        Breed friesian = new Breed("Friesian Horse", "Slower but rarely stumble", 0.20, 0.40);
-        Breed akhalteke = new Breed("Akhal-Teke Horse", "Lightning fast, however likely to slip", 0.5, 0.1);
+        Breed karabakh = new Breed("Karabakh Horse", "Known for endurance and agility", "horse1", 0.35, 0.25);
+        Breed friesian = new Breed("Friesian Horse", "Slower but rarely stumble", "horse2", 0.20, 0.40);
+        Breed akhalteke = new Breed("Akhal-Teke Horse", "Lightning fast, however likely to slip", "horse3", 0.50, 0.10);
         breeds = new Breed[]{karabakh, friesian, akhalteke};
 
 
-        // Create random horses
+        // Create 5 random horses
+        String[] randomNames = {"Thunder", "Blaze", "Shadow", "Comet", "Storm"};
         for (int i = 0; i < 5; i++) {
-            String randomName = "Horse" + (i + 1);
-            double randomConfidence = Math.random(); // Random confidence between 0 and 1
+            String randomName = randomNames[i];
+            double randomConfidence = 0.75;
             Breed randomBreed = breeds[(int) (Math.random() * breeds.length)];
             String randomCoatColour = String.format("%06x", (int) (Math.random() * 0xFFFFFF));
             createHorse(randomName, randomConfidence, randomBreed, randomCoatColour);
-        }
+        }        
 
-        //CreateRaceWindow crw = new CreateRaceWindow();
-        //crw.CreateRaceWindow(this);
+        // Launch the GUI
         ProgramWindow pw = new ProgramWindow();
         pw.ProgramWindow(this);
     }
