@@ -271,4 +271,14 @@ public class Race
             i = i + 1;
         }
     }
+
+    /**
+     * Check if the race is currently in progress
+     * 
+     * @return true if the race is in progress, false otherwise
+     */
+    public boolean isInProgress()
+    {
+        return isInProgress;
+    }
 }
