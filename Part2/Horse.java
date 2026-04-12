@@ -117,7 +117,7 @@ public class Horse
      */
     public double getConfidence()
     {
-        return this.confidence;
+        return Math.round(this.confidence * 100.0) / 100.0;
     }
     
     /**
